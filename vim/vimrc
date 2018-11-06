@@ -1,0 +1,81 @@
+" => VIM user interface
+
+" Indent automatically depending on filetype
+" filetype indent on
+" filetype plugin on
+" set autoindent
+
+set number  					" Turn on line numbering. Turn it off with "set nonu"
+nmap <F1> :set invnumber<CR>   " showing number with a key
+set hls 						" Highlight search
+set hlsearch 					" Hightliht maches
+set incsearch					" search as characters are entered
+set ruler						" Always show current position
+set smartcase					" When searching try to be smart about cases
+set magic						" For regular expressions turn magic on
+set cursorline					" highlight current line
+set showmatch					" highlight matching [{()}]
+set clipboard=exclude:.* 		" Open vim faster in SSH connection avoid connect to X server"
+
+" => Colors and Fonts
+
+colorscheme desert
+set background=dark
+set encoding=utf8				" Set utf8 as standard encoding and en_US as the standard language
+
+" => Files, backups and undo
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway ...
+set nobackup
+set nowb
+set noswapfile
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+
+" => Indentation
+set shiftwidth=4
+set softtabstop=4
+"set tabstop=4
+"set autoindent
+"set smartindent
+"set smarttab
+"set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+" => Misc
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'mc
+
+" => Setting color column and vertical line
+
+if exists('+colorcolumn')
+    set colorcolumn=79
+    highlight ColorColumn ctermbg=DarkCyan
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+" show empty spaces at the end of the line
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+set t_Co=256
+
+" References
+" https://amix.dk/vim/vimrc.html
+" http://dougblack.io/words/a-good-vimrc.html
+" https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
