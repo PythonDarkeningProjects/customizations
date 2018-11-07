@@ -75,6 +75,9 @@ autocmd BufWinLeave * call clearmatches()
 
 set t_Co=256
 
+" => enabling sintax for programming
+syntax enable
+
 " References
 " https://amix.dk/vim/vimrc.html
 " http://dougblack.io/words/a-good-vimrc.html

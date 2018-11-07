@@ -1,0 +1,16 @@
+# This is Git's per-user configuration file.
+[merge]
+    tool = kdiff3
+[alias]
+    show-local-branches = branch
+    show-remote-branches = !"git branch -r --color=always | sed 's|origin/||g' | grep -v HEAD"
+    show-all-branches = !"git branch -a --color=always | sed 's|remotes/origin/||g' | grep -v HEAD"
+    co = checkout
+    bd = branch -D
+    cm = commit
+    cma = commit --amend
+    st = status
+[color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
