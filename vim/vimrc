@@ -78,6 +78,9 @@ set t_Co=256
 " => enabling sintax for programming
 syntax enable
 
+"Enable delete button on MacOS"
+set backspace=indent,eol,start
+
 " References
 " https://amix.dk/vim/vimrc.html
 " http://dougblack.io/words/a-good-vimrc.html
