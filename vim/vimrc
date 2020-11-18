@@ -59,7 +59,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'mc
 " => Setting color column and vertical line
 
 if exists('+colorcolumn')
-    set colorcolumn=79
+    set colorcolumn=85
     highlight ColorColumn ctermbg=DarkCyan
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
@@ -80,6 +80,50 @@ syntax enable
 
 "Enable delete button on MacOS"
 set backspace=indent,eol,start
+
+" Plugins installation: https://opensource.com/article/20/2/how-install-vim-plugins
+call plug#begin()
+Plug 'preservim/nerdcommenter'
+call plug#end()
+
+
+" Rainbow Parentheses Improved: https://github.com/frazrepo/vim-rainbow
+let g:rainbow_active = 1
+
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+    \ ]
+
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+" ============================================================================
+
+" NerdTree: https://github.com/preservim/nerdtree
+" Toggle NerdTree with Ctrl + T
+map <C-t> :NERDTreeToggle<CR>
+" Open a NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+
+" Switch between the explorer and the file openned
+" type: Ctrl + w (twice)
+" ============================================================================
+
+
+" https://github.com/airblade/vim-gitgutter/
+" When you make a change to a file tracked by git, the diff markers should appear 
+" automatically. The delay is governed by vim's updatetime option; the default 
+" value is 4000, i.e. 4 seconds, but I suggest reducing it to around 100ms
+set updatetime=100
+
+" Suppress the signs when a file has more than 500 changes, to avoid slowing down the UI.
+let g:gitgutter_max_signs = 500  " default value (Vim < 8.1.0614, Neovim < 0.4.0)
+let g:gitgutter_max_signs = -1   " default value (otherwise)
+
+" ============================================================================
 
 " References
 " https://amix.dk/vim/vimrc.html
